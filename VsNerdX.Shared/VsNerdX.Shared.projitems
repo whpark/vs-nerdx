@@ -11,9 +11,11 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Command\CommandKey.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\CommandState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Directory\CloseNodeOrGoToParent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Directory\CloseNodeRecursively.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Directory\CloseParentNode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Directory\OpenNodeRecursively.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Command\Directory\OpenNodeOrGotoChild.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\Directory\OpenOrCloseNode.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ExecutionContext.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Command\ExecutionResult.cs" />

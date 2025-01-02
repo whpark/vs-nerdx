@@ -14,6 +14,8 @@ Currently supported Visual Studio versions are 2017, 2019, and 2022.
 * `O` - recursively open node
 * `x` - close parent of node
 * `X` - close all child nodes  
+* `l` - open & go to child
+* `h` - close & go to parent
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of current node recursively
 
 #### File node mappings

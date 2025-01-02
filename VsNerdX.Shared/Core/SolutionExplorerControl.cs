@@ -93,6 +93,20 @@ namespace VsNerdX.Core
             EnsureSelection();
         }
 
+        public void GoToChild()
+        {
+            var listBox = GetHierarchyListBox();
+            var item = listBox.SelectedItem;
+
+            if (item == null) return;
+
+            var childNodes = item.GetType().GetProperty("ChildNodes").GetValue(item);
+            if (childNodes == null) return;
+
+            var first = listBox.SelectedItem = ((IEnumerable)childNodes).Cast<Object>().ToList().First();
+            EnsureSelection();
+        }
+
         public void CloseParentNode()
         {
             GoToParent();
@@ -101,16 +115,23 @@ namespace VsNerdX.Core
                 ?.SetValue(parent, false);
         }
 
-        public void OpenOrCloseNode()
+        public bool OpenOrCloseNode(eEXPAND_CODE eExpandCode)
         {
             var listBox = GetHierarchyListBox();
             var item = listBox.SelectedItem;
             var expandable = (bool?)item.GetType().GetProperty("IsExpandable")?.GetValue(item);
             var expanded = (bool?)item.GetType().GetProperty("IsExpanded")?.GetValue(item);
 
-            if (expandable != true) return;
+            //if (expandable != true) return false;
 
-            item.GetType().GetProperty("IsExpanded")?.SetValue(item, expanded != true);
+            var newExpandState = (eExpandCode == eEXPAND_CODE.toggle) ? !expanded : eExpandCode == eEXPAND_CODE.open;
+            if (newExpandState == expanded)
+				return false;
+            if ( (newExpandState == true) && (expandable == false))
+                return false;
+
+			item.GetType().GetProperty("IsExpanded")?.SetValue(item, newExpandState == true);
+            return true;
         }
 
         public Object GetSelectedItem()
